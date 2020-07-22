@@ -97,27 +97,26 @@
                     <li><a href="#line1_3">Migration Tables and Seeds</a></li>
                   </ul>
                 </li>
-                <li><a href="#line2">How to Install WordPress</a></li>
-                <li><a href="#line3">How to Install Theme</a></li>
-                <li><a href="#line4">Necessary Plugins</a></li>
-                <li><a href="#line5">Creating Blog Pages</a></li>
-                <li><a href="#line6">Revolution Slider</a></li>
                 <li>
-                  <a href="#line7">How to Use Option Panel</a>
+                  <a href="#line2">Authentication</a>
                   <ul class="nav">
-                    <li><a href="#line7_1">General Options</a></li>
-                    <li><a href="#line7_2">Style Options</a></li>
-                    <li><a href="#line7_3">Header Options</a></li>
-                    <li><a href="#line7_4">Font Options</a></li>
-                    <li><a href="#line7_5">Slider Options</a></li>
-                    <li><a href="#line7_6">Page Options</a></li>
-                    <li><a href="#line7_7">Import & Export</a></li>
+                    <li><a href="#line2_1">Migration Table</a></li>
+                    <li><a href="#line2_2">Seeding Table</a></li>
+                    <li><a href="#line2_3">Model</a></li>
+                    <li><a href="#line2_4">Controller (Logic)</a></li>
+                    <li><a href="#line2_5">Blade View</a></li>
                   </ul>
                 </li>
-                <li><a href="#line8">Support Desk</a></li>
-                <li><a href="#line9">Files & Sources</a></li>
-                <li><a href="#line10">Version History (Changelog)</a></li>
-                <li><a href="#line11">Copyright and license</a></li>
+                <li>
+                  <a href="#line3">API Bagian</a>
+                  <ul class="nav">
+                    <li><a href="#line3_1">Migration Table</a></li>
+                    <li><a href="#line3_2">Seeding</a></li>
+                    <li><a href="#line3_3">Model</a></li>
+                    <li><a href="#line3_4">Controller (Logic)</a></li>
+                    <li><a href="#line3_5">Blade View</a></li>
+                  </ul>
+                </li>
               </ul>
             </nav>
           </div>
@@ -215,7 +214,7 @@
                   <h4 id="line1_1">
                     Setup Environment <a href="#top">#back to top</a>
                   </h4>
-                  <pre class="brush: html">
+                  <pre class="brush: bash">
                     $ git clone https://github.com/prostiate/si-administrasi.git
                     $ cd si-administrasi
                     $ composer install
@@ -227,14 +226,14 @@
                       target="_blank">this project</a> then go to the root folder and run these 
                     commands to install the requred package, publish assets and config.
                   </p>
-                  <pre class="brush: html">
+                  <pre class="brush: bash">
                     $ cp .env.example .env
                     $ php artisan key:generate
                   </pre>
                   <p>
                     Copy the .env.example to .env and generate the key.
                   </p>
-                  <pre class="brush: html">
+                  <pre class="brush: php">
                     DB_CONNECTION=mysql
                     DB_HOST=127.0.0.1
                     DB_PORT=3306
@@ -245,7 +244,7 @@
                   <p>
                     Setup your database connection environment.
                   </p>
-                  <pre class="brush: html">
+                  <pre class="brush: php">
                     MAIL_MAILER=smtp
                     MAIL_HOST=yourmailhost
                     MAIL_PORT=465
@@ -258,7 +257,7 @@
                   <p>
                     If you want your app to send mail, you need to add this on your .env.
                   </p>
-                  <pre class="brush: html">
+                  <pre class="brush: bash">
                     php artisan migrate:fresh --seed
                   </pre>
                   <p>
@@ -281,7 +280,7 @@
                   <h4 id="line1_2">
                     Other Packages <a href="#top">#back to top</a>
                   </h4>
-                  <pre class="brush: html">
+                  <pre class="brush: php">
                     "maatwebsite/excel": "^3.1",
                     "owen-it/laravel-auditing": "^10.0",
                     "ramsey/uuid": "^4.0",
@@ -294,7 +293,7 @@
                     Above is external packages that we use for this project.
                   </p>
 
-                  <pre class="brush: html">
+                  <pre class="brush: php">
                     namespace App\Exports;
                     
                     use App\User;
@@ -316,7 +315,7 @@
                     so we can easily implement it.
                   </p>
 
-                  <pre class="brush: html">
+                  <pre class="brush: php">
                     namespace App;
 
                     use Illuminate\Database\Eloquent\Model;
@@ -336,7 +335,7 @@
                         target="_blank">owen-it/laravel-auditing</a></strong> used for logging all the user's activites events (create, update, delete, restore).
                   </p>
 
-                  <pre class="brush: html">
+                  <pre class="brush: php">
                     use Ramsey\Uuid\Uuid;
 
                     $uuid = Uuid::uuid4();
@@ -354,7 +353,7 @@
                         target="_blank">ramsey/uuid</a></strong> used for creating the personal number (<strong>temporary disabled, will be used for the future</strong>).
                   </p>
 
-                  <pre class="brush: html">
+                  <pre class="brush: php">
                     // Adding permissions to a user
                     $user->givePermissionTo('edit articles');
 
@@ -370,7 +369,7 @@
                         target="_blank">spatie/laravel-permission</a></strong> used for you to manage user permissions and roles in a database.
                   </p>
 
-                  <pre class="brush: html">
+                  <pre class="brush: php">
                     $position = Location::get();
 
                     // Returns instance of Stevebauman\Location\Position
@@ -382,7 +381,7 @@
                         target="_blank">stevebauman/location</a></strong> used for retrieve a users location from their IP address using external web services, or through a flat-file database hosted on your server.
                   </p>
 
-                  <pre class="brush: html">
+                  <pre class="brush: php">
                     use Yajra\Datatables\Facades\Datatables;
 
                     // Using Eloquent
@@ -424,8 +423,8 @@
                     Migrations are like version control for your database, allowing your team to modify and share the application's database schema.
                     <a target="_blank" href="https://laravel.com/docs/7.x/migrations"><small>(laravel/migration)</small></a>
                   </p>
-                  <pre class="brush: html">
-                    ##### Migration Files
+                  <pre class="brush: php">
+                    // Migration Files
                     2014_10_12_000000_create_users_table.php
                     2014_10_12_100000_create_password_resets_table.php
                     2019_08_19_000000_create_failed_jobs_table.php
@@ -444,7 +443,7 @@
                     2020_06_29_141401_create_asset_perangkat_histories_table.php
                     2020_07_15_144248_create_jobs_table.php
 
-                    ##### Migration Table User
+                    // Migration Table User
                     use Illuminate\Database\Migrations\Migration;
                     use Illuminate\Database\Schema\Blueprint;
                     use Illuminate\Support\Facades\Schema;
@@ -469,7 +468,7 @@
                                 $table->softDeletes();
                             });
                         }
-                        ...
+                        // ...
                       }
                   </pre>
                   <p>
@@ -478,7 +477,7 @@
                     <a target="_blank" href="https://laravel.com/docs/7.x/migrations"><small>(laravel/migration)</small></a>
                   </p>
 
-                  <pre class="brush: html">
+                  <pre class="brush: bash">
                     php artisan migrate
                   </pre>
                   <p>
@@ -486,8 +485,8 @@
                     <a target="_blank" href="https://laravel.com/docs/7.x/migrations"><small>(laravel/migration)</small></a>
                   </p>
 
-                  <pre class="brush: html">
-                    ##### Seeder Files
+                  <pre class="brush: php">
+                    // Seeder Files
                     BagianSeeder.php
                     DatabaseSeeder.php
                     PermissionTableSeeder.php
@@ -495,7 +494,7 @@
                     UserSeeder.php
                     VendorSeeder.php
 
-                    ##### DatabaseSeeder.php
+                    // DatabaseSeeder.php
                     use Illuminate\Database\Seeder;
 
                     class DatabaseSeeder extends Seeder
@@ -520,7 +519,7 @@
                     <a target="_blank" href="https://laravel.com/docs/7.x/seeding"><small>(laravel/seeding)</small></a>
                   </p>
 
-                  <pre class="brush: html">
+                  <pre class="brush: bash">
                     php artisan db:seed
 
                     php artisan db:seed --class=UserSeeder
@@ -531,7 +530,7 @@
                     <a target="_blank" href="https://laravel.com/docs/7.x/seeding"><small>(laravel/seeding)</small></a>
                   </p>
 
-                  <pre class="brush: html">
+                  <pre class="brush: bash">
                     php artisan migrate:fresh --seed
                   </pre>
                   <p>
@@ -567,36 +566,6 @@
                   <a href="#">WordPress Installation via FTP.</a>
                 </p>
               </div>
-
-              <hr />
-
-              <h4>Upload via WordPress Admin</h4>
-
-              <p>
-                Lorem the It is a long established fact that a reader will be
-                distracted by the readable content of a page when looking at its
-                layout. The point of using Lorem Ipsum is that it has a
-                more-or-less normal distribution of letters, as opposed to using
-                'Content here, content here', making it look like readable
-                English.
-              </p>
-
-              <a href="#" class="btn btn-primary">Get a Installation Service</a>
-              <a href="#" class="btn btn-info">Ask a Question</a>
-              <hr />
-              <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <div class="media">
-                    <iframe
-                      width="560"
-                      height="315"
-                      src="https://www.youtube.com/embed/snFzbPm_RUE"
-                      frameborder="0"
-                      allowfullscreen
-                    ></iframe>
-                  </div>
-                </div>
-              </div>
             </section>
             <!-- end section -->
 
@@ -604,7 +573,7 @@
               <div class="row">
                 <div class="col-md-12 left-align">
                   <h2 class="dark-text">
-                    How to Install Theme <a href="#top">#back to top</a>
+                    API Bagian <a href="#top">#back to top</a>
                     <hr />
                   </h2>
                 </div>
@@ -612,60 +581,216 @@
               </div>
               <!-- end row -->
 
-              <h4>Upload via WordPress Admin</h4>
-
-              <p>
-                Lorem the It is a long established fact that a reader will be
-                distracted by the readable content of a page when looking at its
-                layout. The point of using Lorem Ipsum is that it has a
-                more-or-less normal distribution of letters, as opposed to using
-                'Content here, content here', making it look like readable
-                English.
-              </p>
-
-              <a href="#" class="btn btn-primary">Get a Installation Service</a>
-              <a href="#" class="btn btn-info">Ask a Question</a>
-
-              <hr />
-
-              <h4>Upload via FTP Server</h4>
-
-              <p>
-                Lorem the It is a long established fact that a reader will be
-                distracted by the readable content of a page when looking at its
-                layout. The point of using Lorem Ipsum is that it has a
-                more-or-less normal distribution of letters, as opposed to using
-                'Content here, content here', making it look like readable
-                English.
-              </p>
-
-              <a href="#" class="btn btn-primary">Get a Installation Service</a>
-              <a href="#" class="btn btn-info">Ask a Question</a>
-              <hr />
+              <!-- migration table -->
               <div class="row">
-                <div class="col-md-6">
-                  <div class="media">
-                    <iframe
-                      width="560"
-                      height="315"
-                      src="https://www.youtube.com/embed/yQnQyI5WlKs"
-                      frameborder="0"
-                      allowfullscreen
-                    ></iframe>
-                  </div>
+                <div class="col-md-12">
+                  <h4 id="line3_1">
+                    Migration Table <a href="#top">#back to top</a>
+                  </h4>
+                  <pre class="brush: php">
+                    Schema::create('bagians', function (Blueprint $table) {
+                      $table->id();
+                      $table->string('nama');
+                      $table->integer('kode');
+                      $table->string('sandi');
+                      $table->timestamps();
+                      $table->softDeletes();
+                    });
+                  </pre>
+                  <p>
+                    Berikut merupakan schema table untuk module bagian, <code>$table->timestamps()</code> adalah function dari laravel yang berfungsi untuk membuat column
+                    <code>created_at</code> dan <code>deleted_at</code> dan <code>softDeletes()</code> berfungsi untuk membuat column <code>deleted_at</code>, agar pada saat delete records tidak langsung
+                    terhapus melainkan mengubah <code>deleted_at</code> menjadi current time saat dia menghapus.
+                    <a target="_blank" href="https://laravel.com/docs/7.x/eloquent#soft-deleting"><small>(laravel/soft-deleting)</small></a><br><br>
+                    Agar bisa memakai <code>$table->softDeletes()</code>, model harus mengimport <code>softDeletes</code> juga.
+                    <a href="#line3_3"><small>(go to Model)</small></a>
+                  </p>
                 </div>
-                <div class="col-md-6">
-                  <div class="media">
-                    <iframe
-                      width="560"
-                      height="315"
-                      src="https://www.youtube.com/embed/z0kEVwJB_go"
-                      frameborder="0"
-                      allowfullscreen
-                    ></iframe>
-                  </div>
-                </div>
+                <!-- end col -->
               </div>
+              <!-- end row -->
+
+              <!-- seeding table -->
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 id="line3_2">
+                    Seeding Table <a href="#top">#back to top</a>
+                  </h4>
+                  <pre class="brush: php">
+                    $datas = [
+                        '99999999' => 'BELUM ADA BAGIAN DI SERVER',
+                        '70238340' => 'APPLICATION MANAGEMENT & OPERATION DIVISION',
+                        '70249602' => 'APPLICATION DEVELOPMENT 1 DEPARTMENT',
+                        '70254703' => 'CORE BANKING PLATFORM DEVELOPMENT FUNCTION',
+                        '70254704' => 'CORPORATE CORE PLATFORM DEVELOPMENT FUNCTION',
+                        '70254705' => 'CARD MANAGEMENT PLATFORM DEVELOPMENT FUNCTION',
+                        '70254706' => 'INTERNATIONAL & TREASURY PLATFORM DEVELOPMENT FUNCTION',
+                        '70254707' => 'RECONCILIATION & SETTLEMENT PLATFORM DEVELOPMENT FUNCTION',
+                        '70249616' => 'APPLICATION DEVELOPMENT 2 DEPARTMENT',
+                        '70254708' => 'DISTRIBUTION CHANNEL PLATFORM DEVELOPMENT FUNCTION',
+                        '70254709' => 'OUTLET DELIVERY PLATFORM DEVELOPMENT FUNCTION',
+                        '70254710' => 'MIDDLEWARE PLATFORM DEVELOPMENT FUNCTION',
+                        '70254711' => 'SUPER APPS PLATFORM DEVELOPMENT FUNCTION',
+                        '70254712' => 'CASH MANAGEMENT PLATFORM DEVELOPMENT FUNCTION',
+                        '70249603' => 'APPLICATION QUALITY IMPROVEMENT DEVELOPMENT DEPARTMENT',
+                        '70254713' => 'APPLICATION ENGINEERING SUPPORT FUNCTION',
+                        '70254714' => 'KNOWLEDGE MANAGEMENT FUNCTION',
+                        '70254715' => 'APPLICATION PORTOFOLIO & QUALITY ASSURANCE FUNCTION',
+                        '70254716' => 'APPLICATION INTEGRATION TESTING FUNCTION',
+                        '70249604' => 'APPLICATION OPERATION SERVICE DEVELOPMENT DEPARTMENT',
+                        '70254717' => 'IT SERVICE DESK',
+                        '70254718' => 'DATABASE ADMINISTRATION OPERATION SERVICES FUNCTION',
+                        '70254719' => 'CORE & HOST APPLICATION OPERATION SERVICES FUNCTION',
+                        '70254720' => 'MIDDLEWARE APPLICATION OPERATION SERVICES FUNCTION',
+                        '70254721' => 'DISTRIBUTION & OUTLET APPLICATION SERVICES FUNCTION',
+                        '70254722' => 'SUPER APPS OPERATION SERVICES FUNCTION',
+                        '70254723' => 'RECONCILIATION APPLICATION OPERATION SERVICES FUNCTION',
+                    ];
+                    $sandi = [
+                        '99999999' => 'BELUM ADA BAGIAN DI SERVER',
+                        '70238340' => 'APP',
+                        '70249602' => 'CSD',
+                        '70254703' => 'CBP',
+                        '70254704' => 'CCP',
+                        '70254705' => 'CDP',
+                        '70254706' => 'ITP',
+                        '70254707' => 'RSP',
+                        '70249616' => 'OCD',
+                        '70254708' => 'DCP',
+                        '70254709' => 'ODP',
+                        '70254710' => 'MDP',
+                        '70254711' => 'SAP',
+                        '70254712' => 'CMP',
+                        '70249603' => 'QIM',
+                        '70254713' => 'AES',
+                        '70254714' => 'KMG',
+                        '70254715' => 'APQ',
+                        '70254716' => 'ITG',
+                        '70249604' => 'OPA',
+                        '70254717' => 'SDK',
+                        '70254718' => 'DBA',
+                        '70254719' => 'CAO',
+                        '70254720' => 'MDO',
+                        '70254721' => 'DAO',
+                        '70254722' => 'SAO',
+                        '70254723' => 'RAO',
+                    ];
+                    foreach($datas as $key => $data){
+                        Bagian::create([
+                            'nama' => $data,
+                            'kode' => $key,
+                            'sandi' => $sandi[$key],
+                        ]);
+                    }
+                  </pre>
+                  <p>
+                    Data tersebut merupakan records fixed yang harus ada di database pada saat fresh install. Karena di aplikasi tersebut, untuk module bagian tidak ada event <code>created</code> dan <code>updated</code>,
+                    hanya ada event <code>deleted</code> dan <code>restored</code>.<br><br>
+                    Untuk record data <code>'99999999' => 'BELUM ADA BAGIAN DI SERVER'</code> dan sandi <code>'99999999' => 'BELUM ADA BAGIAN DI SERVER'</code>, sebagai default value pada saat melakukan import data pekerja jika
+                    pada excel data import tersebut dibagian column bagian tidak ada recordnya di existing.
+                    <a target="_blank" href="https://laravel.com/docs/7.x/seeding"><small>(laravel/seeding)</small></a>
+                  </p>
+                </div>
+                <!-- end col -->
+              </div>
+              <!-- end row -->
+
+              <!-- model -->
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 id="line3_3">
+                    Model <a href="#top">#back to top</a>
+                  </h4>
+                  <pre class="brush: php">
+                    namespace App\Models;
+
+                    use Illuminate\Database\Eloquent\Model;
+                    use Illuminate\Database\Eloquent\SoftDeletes;
+                    use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+                    use OwenIt\Auditing\Auditable;
+
+                    class Bagian extends Model implements AuditableContract
+                    {
+                        use SoftDeletes;
+                        use Auditable;
+                        protected $table = 'bagians';
+                        protected $fillable = [
+                            'nama',
+                            'kode',
+                            'sandi',
+                        ];
+
+                        public function data_screening()
+                        {
+                            return $this->hasMany('App\Models\Screening', 'bagian_id');
+                        }
+
+                        public function data_pekerja()
+                        {
+                            return $this->hasMany('App\Models\Pekerja');
+                        }
+                    }
+                  </pre>
+                  <p>
+                    Module bagian memiliki dua relation, yaitu relation dengan module screening dan pekerja dengan type relation-nya hasmany (One To Many). 
+                    <a target="_blank" href="https://laravel.com/docs/7.x/eloquent-relationships#one-to-many"><small>(laravel/one-to-many)</small></a><br><br>
+                    Model bagian ini menggunakan <code>softDeletes</code> agar pada saat user mendelete record, record tersebut tidak langsung terhapus melainkan akan mengupdate 
+                    column <code>deleted_at</code> dengan timestamp current time. Dan <code>Auditable</code> agar aplikasi dapat merekam aktivitas user melakukan event seperti
+                    <code>created</code>, <code>updated</code>, <code>deleted</code> dan <code>restored</code>.
+                  </p>
+                </div>
+                <!-- end col -->
+              </div>
+              <!-- end row -->
+
+              <!-- controller (logic) -->
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 id="line3_3">
+                    Controller (Logic) <a href="#top">#back to top</a>
+                  </h4>
+                  <pre class="brush: php">
+                    namespace App\Models;
+
+                    use Illuminate\Database\Eloquent\Model;
+                    use Illuminate\Database\Eloquent\SoftDeletes;
+                    use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+                    use OwenIt\Auditing\Auditable;
+
+                    class Bagian extends Model implements AuditableContract
+                    {
+                        use SoftDeletes;
+                        use Auditable;
+                        protected $table = 'bagians';
+                        protected $fillable = [
+                            'nama',
+                            'kode',
+                            'sandi',
+                        ];
+
+                        public function data_screening()
+                        {
+                            return $this->hasMany('App\Models\Screening', 'bagian_id');
+                        }
+
+                        public function data_pekerja()
+                        {
+                            return $this->hasMany('App\Models\Pekerja');
+                        }
+                    }
+                  </pre>
+                  <p>
+                    Module bagian memiliki dua relation, yaitu relation dengan module screening dan pekerja dengan type relation-nya hasmany (One To Many). 
+                    <a target="_blank" href="https://laravel.com/docs/7.x/eloquent-relationships#one-to-many"><small>(laravel/one-to-many)</small></a><br><br>
+                    Model bagian ini menggunakan <code>softDeletes</code> agar pada saat user mendelete record, record tersebut tidak langsung terhapus melainkan akan mengupdate 
+                    column <code>deleted_at</code> dengan timestamp current time. Dan <code>Auditable</code> agar aplikasi dapat merekam aktivitas user melakukan event seperti
+                    <code>created</code>, <code>updated</code>, <code>deleted</code> dan <code>restored</code>.
+                  </p>
+                </div>
+                <!-- end col -->
+              </div>
+              <!-- end row -->
+
             </section>
             <!-- end section -->
 
@@ -1501,5 +1626,7 @@
     <script src="js/syntax-highlighter/scripts/shBrushXml.js"></script>
     <script src="js/syntax-highlighter/scripts/shBrushCss.js"></script>
     <script src="js/syntax-highlighter/scripts/shBrushJScript.js"></script>
+    <script src="js/syntax-highlighter/scripts/shBrushPhp.js"></script>
+    <script src="js/syntax-highlighter/scripts/shBrushBash.js"></script>
   </body>
 </html>
